@@ -1,6 +1,5 @@
 package nl.eonics.aophacknight.aspect;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
@@ -8,6 +7,8 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LoggingAspect {
+
+
 
 
     // 1. @Before Advice - Add a logging statement before the execution of getProductById().
@@ -19,27 +20,14 @@ public class LoggingAspect {
     // 4. @Around Advice -  Add an advice to time the execution of createProduct().
 
 
-     // 1. @Before Advice - Executed before the method `getProductById` is called
+
+
+    // 1. @Before Advice - Executed before the method `getProductById` is called
     @Before("execution(* nl.eonics.aophacknight.service.ProductService.getProductById(..))")
     public void logBeforeGetProduct(JoinPoint point) {
         System.out.println("Executing @Before advice: Fetching product details... Function called - " + point.getSignature().getName()
         + " with argument: " + point.getArgs()[0]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 
     // 2. @AfterReturning Advice - Executed after the method `getProductById` returns
     @AfterReturning(pointcut = "execution(* nl.eonics.aophacknight.service.ProductService.getProductById(..))", returning = "result")
@@ -51,6 +39,8 @@ public class LoggingAspect {
     @AfterThrowing(pointcut = "execution(* nl.eonics.aophacknight.service.ProductService.deleteProduct(..))", throwing = "exception")
     public void logAfterThrowingDeleteProduct(Exception exception) {
         System.out.println("Executing @AfterThrowing advice: Exception occurred while deleting product. Message: " + exception.getMessage());
+        throw new IO
+    
     }
 
     // 4. @Around Advice - Surrounds the execution of `createProduct`
